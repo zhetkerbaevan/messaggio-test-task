@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/zhetkerbaevan/messaggio-test-task/internal/service"
+	"github.com/zhetkerbaevan/messaggio-test-task/internal/store"
 )
 
 type APIServer struct {
@@ -21,8 +23,10 @@ func (s *APIServer) Run() error {
 	router := mux.NewRouter() 
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
 
+	messageStore := store.NewMessagesStore(s.db)
+	messageService := service.NewHandler(messageStore)
+	messageService.RegisterRoutes(subrouter)
 
-	
 	log.Println("Listening on", s.addr)
 	return http.ListenAndServe(s.addr, router)
 }

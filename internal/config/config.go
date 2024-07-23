@@ -8,6 +8,7 @@ type Config struct {
 	DBHost     string
 	DBPort     string
 	DBName     string
+	KafkaBrokers string
 }
 
 var Envs = initConfig() //Singleton
@@ -18,7 +19,8 @@ func initConfig() Config {
 		DBPassword: getEnv("DB_PASSWORD", "1234"),
 		DBHost: getEnv("DB_HOST", "localhost"),
 		DBPort: getEnv("DB_PORT", "5433"),
-		DBName: getEnv("DB_NAME", "messaggio-test-task"),
+		DBName: getEnv("DB_NAME", "messaggio_test_task"),
+		KafkaBrokers: getEnv("KAFKA_BROKERS", "localhost:9092"),
 	}
 }
 
