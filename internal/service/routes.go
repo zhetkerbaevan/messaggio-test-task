@@ -55,5 +55,10 @@ func (h *Handler) handleMessage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) handleStatistics(w http.ResponseWriter, r *http.Request) {
-
+	statistics, err := h.store.GetStatistics()
+	if err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+	utils.WriteJSON(w, http.StatusOK, statistics)
 }

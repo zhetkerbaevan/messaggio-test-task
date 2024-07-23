@@ -31,22 +31,27 @@ func (s *MessagesStore) MarkMessageAsProcessed(id int) error {
 	return nil
 }
 
-func (s *MessagesStore) GetStatistics() ([]model.Messages, error) {
-	rows, err := s.db.Query("SELECT * FROM messages WHERE processed=$1", true)
-	if err != nil {
-		return nil, err
-	}
+func (s *MessagesStore) GetStatistics() (*model.Statistics, error) {
+	var stats model.Statistics
+	//Get number of all messages
+    err := s.db.QueryRow("SELECT COUNT(*) FROM messages").Scan(&stats.TotalMessages)
+    if err != nil {
+        return nil, err
+    }
 
-	messages := make([]model.Messages, 0)
-	for rows.Next() {
-		message, err := scanIntoMessages(rows)
-		if err != nil {
-			return nil, err
-		}
+    //Get number of processed messages
+    err = s.db.QueryRow("SELECT COUNT(*) FROM messages WHERE processed = $1", true).Scan(&stats.ProcessedMessages)
+    if err != nil {
+        return nil, err
+    }
 
-		messages = append(messages, *message)
-	}
-	return messages, nil
+    //Get number of unprocessed messages
+    err = s.db.QueryRow("SELECT COUNT(*) FROM messages WHERE processed = $1", false).Scan(&stats.UnprocessedMessages)
+    if err != nil {
+        return nil, err
+    }
+
+    return &stats, nil
 }
 
 func scanIntoMessages(rows *sql.Rows) (*model.Messages, error) {

@@ -11,7 +11,7 @@ type Messages struct {
 
 type MessagesStore interface {
 	CreateMessage(MessagesPayload) (int, error)
-	GetStatistics() ([]Messages, error)
+	GetStatistics() (*Statistics, error)
 	MarkMessageAsProcessed(int) error
 }
 
