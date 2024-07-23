@@ -4,8 +4,8 @@ It also provides an API to fetch statistics on processed messages.
 ## Setup
 1. Clone repository
 ```sh
-git clone https://github.com/zhetkerbaevan/messaggio-test-tas.git
-cd messaggio-test-tas
+git clone https://github.com/zhetkerbaevan/messaggio-test-task.git
+cd messaggio-test-task
 ```
 2. Install Dependencies
  ```sh
