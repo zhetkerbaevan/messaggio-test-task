@@ -12,6 +12,7 @@ type Config struct {
 	KafkaClientCert 	string
 	KafkaClientCertKey 	string
 	KafkaTrustedCert 	string
+	Port 				string
 }
 
 var Envs = initConfig() //Singleton
@@ -27,6 +28,7 @@ func initConfig() Config {
 		KafkaClientCert : getEnv("KAFKA_CLIENT_CERT", ""),
 		KafkaClientCertKey : getEnv("KAFKA_CLIENT_CERT_KEY", ""),
 		KafkaTrustedCert : getEnv("KAFKA_TRUSTED_CERT", ""),
+		Port: getEnv("PORT", "9006"),
 	}
 }
 
