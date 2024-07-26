@@ -16,11 +16,7 @@ import (
 func main() {
 	//Connect to db
 	db, err := db.NewPostgreSQLStorage(config.Config{
-			DBHost: config.Envs.DBHost,
-			DBPort: config.Envs.DBPort,
-			DBUser: config.Envs.DBUser,
-			DBName: config.Envs.DBName,
-			DBPassword: config.Envs.DBPassword,
+			DBUrl: config.Envs.DBUrl,
 		})
 	if err != nil {
 		log.Fatal(err)
