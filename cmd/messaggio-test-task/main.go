@@ -19,7 +19,7 @@ func main() {
 
 	fmt.Println("Connected to DB")
 	//Start server
-	server := api.NewAPIServer(db, config.Envs.Port)
+	server := api.NewAPIServer(db, ":8080")
 	if err := server.Run(); err != nil {
 		log.Fatal(err)
 	}
