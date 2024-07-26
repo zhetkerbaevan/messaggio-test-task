@@ -10,7 +10,7 @@ import (
 
 func NewPostgreSQLStorage(cfg config.Config) (*sql.DB, error) {
 	//Open connection to DB
-	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName))
+	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=require", cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBPassword, cfg.DBName))
 	if err != nil {
 		return nil, err
 	}
