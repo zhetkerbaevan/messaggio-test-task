@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.22.2 AS build
 
 WORKDIR /app
 
@@ -6,14 +6,10 @@ COPY go.mod go.sum ./
 
 COPY . .
 
-RUN go build -o /messaggio-test-task cmd/messaggio-test-task/main.go
+RUN go build -o out ./cmd/messaggio-test-task
 
-FROM alpine:latest
+FROM gcr.io/distroless/base
 
-WORKDIR /
+COPY --from=build /app/out /app/out
 
-COPY --from=builder /messaggio-test-task .
-
-EXPOSE 8080
-
-CMD ["./messaggio-test-task"]
+CMD ["/app/out"]
