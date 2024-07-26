@@ -14,7 +14,7 @@ func initConfig() Config {
 	return Config{
 		DBUrl: getEnv("DB_URL", "postgresql://postgres:AlBUVkGGqvapNtjYsJmnFYCAeVkTpEOG@monorail.proxy.rlwy.net:29387/railway"),
 		KafkaBrokers: getEnv("KAFKA_BROKERS", "localhost:9092"),
-		Port: getEnv("PORT", ":9006"),
+		Port: getEnv("PORT", ":8080"),
 	}
 }
 
